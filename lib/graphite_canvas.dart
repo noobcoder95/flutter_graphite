@@ -122,6 +122,7 @@ class GraphiteCanvas extends StatefulWidget {
 class _GraphiteCanvasState extends State<GraphiteCanvas> {
   final StreamController<Gesture> touchController =
       StreamController.broadcast();
+  final previousTouchState = PreviousTouchState();
   StreamSubscription? streamSubscription;
 
   @override
@@ -561,6 +562,7 @@ class _GraphiteCanvasState extends State<GraphiteCanvas> {
   Widget build(BuildContext context) {
     final size = Size(_getWidthOfCanvas(), _getHeightOfCanvas());
     return TouchDetectionController(touchController, addStreamListener,
+        previousTouchState: previousTouchState,
         child: _buildStack(context, size));
   }
 
